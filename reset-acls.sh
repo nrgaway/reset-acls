@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # reset-acls - recursively reset acls from a target acl directory
-# version 0.1 (February 28, 2014)
+# version 0.11 (February 28, 2014)
 # Copyright (C) 2014 Jason Mehring
 #
 # This program is free software; you can redistribute it and/or modify
@@ -102,7 +102,6 @@ function modify_directory {
 export -f modify_directory
 
 find "$TARGET" -xdev \
-     \( -type f -executable -exec bash -c 'modify_file_executable "{}"' \; \) \
-  -o \( -type d -exec bash -c 'modify_directory "{}"' \; \) \
-  -o \( -type f ! -executable -exec bash -c 'modify_file "{}"' \; \)
-
+     \( -type f -executable -exec bash -c 'modify_file_executable "$1"' - '{}' \; \) \
+  -o \( -type d -exec bash -c 'modify_directory "$1"' - '{}' \; \) \
+  -o \( -type f ! -executable -exec bash -c 'modify_file "$1"' - '{}' \; \)
