@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Reset-acls : Bash script to restore all acl permissions within a directory tree with those provided by a source acl directory" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Reset-acls</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nrgaway/reset-acls">View on GitHub</a>
+
+          <h1 id="project_title">Reset-acls</h1>
+          <h2 id="project_tagline">Bash script to restore all acl permissions within a directory tree with those provided by a source acl directory</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/nrgaway/reset-acls/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/nrgaway/reset-acls/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="reset-acls" class="anchor" href="#reset-acls"><span class="octicon octicon-link"></span></a>reset-acls</h1>
+
+<p>Bash script to restore all acl permissions within a directory tree with those provided by a source acl directory</p>
+
+<h2>
+<a name="usage-reset-acls-source-acl-directory-target-acl-directory" class="anchor" href="#usage-reset-acls-source-acl-directory-target-acl-directory"><span class="octicon octicon-link"></span></a>Usage: reset-acls &lt;source acl directory&gt; [&lt;target acl directory&gt;]</h2>
+
+<p><strong>Examples:</strong>
+To copy the acl from /data/media to all its children</p>
+
+<p><code>reset-acls /data/media</code></p>
+
+<p><code>reset-acls /data/media /data/media</code></p>
+
+<p>To copy the acl from /data/media to /data/music and all its children</p>
+
+<p><code>reset-acls /data/media /data/music</code></p>
+
+<h2>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>NOTES</h2>
+
+<ul>
+<li>If only the source directory is provided then that directory will
+be restored to the acl of the parent of the source.</li>
+<li>You must have appropriate permissions to be able to run this script
+or it will not work (read/write/execute) on every directory and file within target
+-The acl reset should not cross file systems by design, but I have not 
+tested what happens with links yet</li>
+<li>All current acls are backed up before any changes are made so they
+can be restored although all files and directories owner and group
+names are changed to the source directory so it would be more
+difficult to restore</li>
+<li>This script <em>should</em> honor the current settings of executable and non
+executable files</li>
+<li>It may be possible to set up a cron job to automatically task</li>
+</ul><h2>
+<a name="process" class="anchor" href="#process"><span class="octicon octicon-link"></span></a>PROCESS</h2>
+
+<ul>
+<li>Target directory current acls are backed up so they can be restored</li>
+<li>All current acl properties are removed</li>
+<li>Target Files and directories are renamed to same as source</li>
+<li>Target is restored to same acl (access and default) as source</li>
+</ul><h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>May add option not to rename files and directory user and group names automatically</li>
+<li>May require a prompt for users trying to restore a directory structure where the source does not have a default acl</li>
+<li>Don't allow source parent directory to have it acl changed on reset since it is the source and we do not want it messed up if something goes wrong</li>
+<li>Implement a way to prevent specific directory trees or files within the target from being updated.  I am thinking if a sub directory has the +T attribute then it and its children will not be reset.  Same goes for individual files</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Reset-acls maintained by <a href="https://github.com/nrgaway">nrgaway</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
