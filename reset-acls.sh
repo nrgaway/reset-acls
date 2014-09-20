@@ -55,7 +55,7 @@ timestamp() {
 
 # Backup original acl structure
 TIMESTAMP=$(timestamp)
-getfacl -R "$SOURCE" > "acl.backup-$TIMESTAMP"
+getfacl -R "$TARGET" > "acl.backup-$TIMESTAMP"
 
 # Get the master ACL
 ACL=$(getfacl "$SOURCE")
